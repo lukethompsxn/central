@@ -150,7 +150,11 @@ class DynamoDBConfig(BaseDataConfig):
 
             for item in response['Items']:
                 key = item[self._key_attribute]
-                value = item[self._value_attribute]
+
+                try:
+                    value = item[self._value_attribute]
+                except:
+                    value = ''
 
                 if isinstance(value, Mapping):
                     value = make_ignore_case(value)
